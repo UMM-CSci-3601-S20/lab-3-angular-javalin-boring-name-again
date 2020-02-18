@@ -4,7 +4,7 @@ import { HomeComponent } from './home/home.component';
 import { UserListComponent } from './users/user-list.component';
 import { UserProfileComponent } from './users/user-profile.component';
 
-
+//WE NEED TO MAKE A TODOS PART HERE
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'users', component: UserListComponent},
