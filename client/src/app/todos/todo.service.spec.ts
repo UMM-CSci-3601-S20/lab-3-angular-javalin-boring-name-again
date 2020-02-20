@@ -7,35 +7,33 @@ import { TodoService } from './todo.service';
 describe('Todo service: ', () => {
   // A small collection of test todos
   const testTodos: Todo[] = [
-    /**CHANGE THESE
+
     {
-      _id: 'chris_id',
-      name: 'Chris',
-      age: 25,
-      company: 'UMM',
-      email: 'chris@this.that',
-      role: 'admin',
+      _id: ' bob_id',
+      status: 'Complete',
+      owner: 'Bob',
+      body: 'Make a working thingy.',
+      category: 'Finishing the thing',
       avatar: 'https://gravatar.com/avatar/8c9616d6cc5de638ea6920fb5d65fc6c?d=identicon'
     },
+
     {
       _id: 'pat_id',
-      name: 'Pat',
-      age: 37,
-      company: 'IBM',
-      email: 'pat@something.com',
-      role: 'editor',
+      status: 'Incomplete',
+      owner: 'Pat',
+      body: 'Solve all the problems.',
+      category: 'Fixing issues',
       avatar: 'https://gravatar.com/avatar/b42a11826c3bde672bce7e06ad729d44?d=identicon'
     },
+
     {
       _id: 'jamie_id',
-      name: 'Jamie',
-      age: 37,
-      company: 'Frogs, Inc.',
-      email: 'jamie@frogs.com',
-      role: 'viewer',
+      status: 'Complete',
+      owner: 'Jamie',
+      body: 'Update old code.',
+      category: 'Updates'
       avatar: 'https://gravatar.com/avatar/d4a6c71dd9470ad4cf58f78c100258bf?d=identicon'
     }
-     */
   ];
   let todoService: TodoService;
   // These are used to mock the HTTP requests so that we (a) don't have to
@@ -82,50 +80,52 @@ describe('Todo service: ', () => {
     req.flush(testTodos);
   });
 
-  it('getTodos() calls api/todos with filter parameter \'admin\'', () => {
 
-    todoService.getTodos({ role: 'admin' }).subscribe(
+
+  it('getTodos() calls api/todos with filter parameter \'status\'', () => {
+
+    todoService.getTodos({ status: Complete }).subscribe(
       todos => expect(todos).toBe(testTodos)
     );
 
     // Specify that (exactly) one request will be made to the specified URL with the role parameter.
     const req = httpTestingController.expectOne(
-      (request) => request.url.startsWith(todoService.todoUrl) && request.params.has('role')
+      (request) => request.url.startsWith(todoService.todoUrl) && request.params.has('status')
     );
 
     // Check that the request made to that URL was a GET request.
     expect(req.request.method).toEqual('GET');
 
     // Check that the role parameter was 'admin'
-    expect(req.request.params.get('role')).toEqual('admin');
+    expect(req.request.params.get('status')).toEqual('Complete');
 
     req.flush(testTodos);
   });
 
-  //AGE HERE NEEDS TO BE CHANGED
-  it('getTodos() calls api/todos with filter parameter \'age\'', () => {
+  it('getTodos() calls api/todos with filter parameter \'category\'', () => {
 
-    todoService.getTodos({ age: 25 }).subscribe(
-      todos => expect(todos).toBe(testTodoss)
+    //Changes need to happen here
+    todoService.getTodos({ body: 'Fake body.' }).subscribe(
+      todos => expect(todos).toBe(testTodos)
     );
 
     // Specify that (exactly) one request will be made to the specified URL with the role parameter.
     const req = httpTestingController.expectOne(
-      (request) => request.url.startsWith(todoService.todoUrl) && request.params.has('age')
+      (request) => request.url.startsWith(todoService.todoUrl) && request.params.has('category')
     );
 
     // Check that the request made to that URL was a GET request.
     expect(req.request.method).toEqual('GET');
 
     // Check that the role parameter was 'admin'
-    expect(req.request.params.get('age')).toEqual('25');
+    expect(req.request.params.get('category')).toEqual('Updates');
 
     req.flush(testTodos);
   });
 
   it('getTodos() calls api/todos with multiple filter parameters', () => {
 
-    todoService.getTodos({ role: 'editor', company: 'IBM', age: 37 }).subscribe(
+    todoService.getTodos({ status: 'Incomplete', owner: 'Pat', category: 'Fixing issues' }).subscribe(
       todos => expect(todos).toBe(testTodos)
     );
 
@@ -133,7 +133,7 @@ describe('Todo service: ', () => {
     // CHANGES HERE
     const req = httpTestingController.expectOne(
       (request) => request.url.startsWith(todoService.todoUrl)
-        && request.params.has('role') && request.params.has('company') && request.params.has('age')
+        && request.params.has('status') && request.params.has('owner') && request.params.has('category')
     );
 
     // Check that the request made to that URL was a GET request.
@@ -141,9 +141,9 @@ describe('Todo service: ', () => {
 
     // Check that the role parameters are correct
     // CHANGES HERE
-    expect(req.request.params.get('role')).toEqual('editor');
-    expect(req.request.params.get('company')).toEqual('IBM');
-    expect(req.request.params.get('age')).toEqual('37');
+    expect(req.request.params.get('status')).toEqual('Incomplete');
+    expect(req.request.params.get('owner')).toEqual('Pat');
+    expect(req.request.params.get('category')).toEqual('Fixing issues');
 
     req.flush(testTodos);
   });

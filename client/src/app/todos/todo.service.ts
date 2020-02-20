@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from '../../environments/environment';
-import { Todo, TodoRole } from './todo';
+import { Todo } from './todo';
 
 @Injectable()
 export class TodoService {
@@ -11,18 +11,17 @@ export class TodoService {
   constructor(private httpClient: HttpClient) {
   }
 
-  //CHANGES NEED TO BE MADE
-  getTodos(filters?: { role?: TodoRole, age?: number, company?: string }): Observable<Todo[]> {
+  getTodos(filters?: { status?: string, owner?: string, body?: string }): Observable<Todo[]> {
     let httpParams: HttpParams = new HttpParams();
     if (filters) {
-      if (filters.role) {
-        httpParams = httpParams.set('role', filters.role);
+      if (filters.status) {
+        httpParams = httpParams.set('status', filters.status);
       }
-      if (filters.age) {
-        httpParams = httpParams.set('age', filters.age.toString());
+      if (filters.owner) {
+        httpParams = httpParams.set('owner', filters.owner);
       }
-      if (filters.company) {
-        httpParams = httpParams.set('company', filters.company);
+      if (filters.body) {
+        httpParams = httpParams.set('body', filters.body);
       }
     }
     return this.httpClient.get<Todo[]>(this.todoUrl, {
@@ -36,25 +35,15 @@ export class TodoService {
 
   //CHANGES NEED TO TBE MADE
 
-  filterTodos(todos: Todo[], filters: { name?: string, company?: string }): Todo[] {
+  filterTodos(todos: Todo[], filters: { category?: string }): Todo[] {
 
     let filteredTodos = todos;
-//CHANGES THESE
-    // Filter by name
-    if (filters.name) {
-      filters.name = filters.name.toLowerCase();
+    // Filter by category
+    if (filters.category) {
+      filters.category = filters.category.toLowerCase();
 
       filteredTodos = filteredTodos.filter(todo => {
-        return todo.name.toLowerCase().indexOf(filters.name) !== -1;
-      });
-    }
-
-    // Filter by company
-    if (filters.company) {
-      filters.company = filters.company.toLowerCase();
-
-      filteredTodos = filteredTodos.filter(todo => {
-        return todo.company.toLowerCase().indexOf(filters.company) !== -1;
+        return todo.category.toLowerCase().indexOf(filters.category) !== -1;
       });
     }
 
