@@ -168,7 +168,7 @@ describe('Todo service: ', () => {
   it('filterTodos() filters by category', () => {
     expect(testTodos.length).toBe(3);
     const todoCategory = 'Fixing issues';
-    expect(todoService.filterTodos(testTodos, { company: todoCategory }).length).toBe(1);
+    expect(todoService.filterTodos(testTodos, { category: todoCategory }).length).toBe(1);
   });
 
   it('filterTodos() filters by owner and category', () => {

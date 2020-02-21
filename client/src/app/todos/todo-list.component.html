@@ -11,9 +11,9 @@
           <!-- Examples of filtering in Angular -->
 
           <mat-form-field class="input-field">
-            <mat-label>Status</mat-label>
-            <input matInput id="todo-status-input" placeholder="Filter by status"
-            [(ngModel)]="todoStatus" (input)="updateFilter()">
+            <mat-label>Category</mat-label>
+            <input matInput id="todo-category-input" placeholder="Filter by category"
+            [(ngModel)]="todoCategory" (input)="updateFilter()">
             <mat-hint>Filtered in Angular</mat-hint>
           </mat-form-field>
 
@@ -36,42 +36,34 @@
           </mat-form-field>
 
           <mat-form-field class="input-field">
-            <mat-label>Category</mat-label>
-            <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todoCategory" id="todo-role-select">
+            <mat-label>Status</mat-label>
+            <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todoStatus" id="todo-status-select">
               <mat-option>--</mat-option>
-              <!-- NOT SURE IF THIS IS NEEDED FOR THIS PART <mat-option value="admin">Admin</mat-option>
-              <mat-option value="editor">Editor</mat-option>
-              <mat-option value="viewer">Viewer</mat-option> -->
+              <mat-option value=true>Complete</mat-option>
+              <mat-option value=false>Incomplete</mat-option>
             </mat-select>
             <mat-hint>Filtered on server</mat-hint>
           </mat-form-field>
         </div>
 
         <br>
-        <div fxLayout="row wrap" fxLayoutGap="10px">
-          <label>View type: </label>
-          <mat-radio-group aria-label="View type" [(ngModel)]="viewType" id="view-type-radio">
-            <mat-radio-button value="card">Card</mat-radio-button>
-            <mat-radio-button value="list">List</mat-radio-button>
-          </mat-radio-group>
-        </div>
-
       </mat-card-content>
     </mat-card>
   </div>
 </div>
 
+<!--
 <div fxLayout="row">
   <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredTodos; else todosError" >
-    <!-- Switch between card and list view based on the viewType variable, set above in the mar-radio-group -->
+    !-- Switch between card and list view based on the viewType variable, set above in the mar-radio-group --
     <div [ngSwitch]="viewType">
 
-      <!-- Card grid view -->
+      !-- Card grid view--
       <div *ngSwitchCase="'card'" fxLayout="row wrap" fxLayoutGap="10px" class="todo-cards-container">
         <app-todo-card simple="true" *ngFor="let todo of filteredTodos" class="todo-card" [todo]="todo" fxFlex="1 1 280px"></app-todo-card>
       </div>
 
-      <!-- List view -->
+      !-- List view --
       <mat-card *ngSwitchCase="'list'">
         <mat-card-content>
           <mat-nav-list class="todo-nav-list">
@@ -88,7 +80,8 @@
     </div>
   </div>
 
-  <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
+
+  !-- Maybe this should be a pop-up instead of just a text message? Not sure. --
   <ng-template #todosError>
     <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" class="todo-error">
       <mat-error>
@@ -102,3 +95,4 @@
   </ng-template>
 
 </div>
+-->

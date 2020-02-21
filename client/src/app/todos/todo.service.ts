@@ -38,7 +38,7 @@ export class TodoService {
 
   //CHANGES NEED TO BE MADE
 
-  filterTodos(todos: Todo[], filters: { status?: boolean, category?: string, company?: string, owner?: string}): Todo[] {
+  filterTodos(todos: Todo[], filters: { status?: boolean, category?: string, body?: string, owner?: string}): Todo[] {
 
     let filteredTodos = todos;
     // Filter by category
@@ -52,29 +52,31 @@ export class TodoService {
 
     // Filter by status
     if (filters.status) {
-      filters.status = filters.status.toLowerCase();
-
       filteredTodos = filteredTodos.filter(todo => {
-        if (filteredTodos == 'complete')
-        return todo.status;
+        if (filters.status == true) {
+          return 'Complete'
+        }
+        if (filters.status == false) {
+          return 'Incomplete'
+        }
       });
     }
 
-    // Filter by company
-    if (filters.category) {
-      filters.category = filters.category.toLowerCase();
+    // Filter by body
+    if (filters.body) {
+      filters.body = filters.body.toLowerCase();
 
       filteredTodos = filteredTodos.filter(todo => {
-        return todo.category.toLowerCase().indexOf(filters.category) !== -1;
+        return todo.body.toLowerCase().indexOf(filters.body) !== -1;
       });
     }
 
     // Filter by owner
-    if (filters.category) {
-      filters.category = filters.category.toLowerCase();
+    if (filters.owner) {
+      filters.owner = filters.owner.toLowerCase();
 
       filteredTodos = filteredTodos.filter(todo => {
-        return todo.category.toLowerCase().indexOf(filters.category) !== -1;
+        return todo.owner.toLowerCase().indexOf(filters.owner) !== -1;
       });
     }
 
