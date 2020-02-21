@@ -30,8 +30,8 @@
 
           <mat-form-field class="input-field">
             <mat-label>Body</mat-label>
-            <input matInput id="todo-body-input" type="number" placeholder="Filter by body"
-            min="0" max="200" [(ngModel)]="todoBody" (input)="getTodosFromServer()">
+            <input matInput id="todo-body-input" type="string" placeholder="Filter by body"
+            [(ngModel)]="todoBody" (input)="getTodosFromServer()">
             <mat-hint>Filtered on Server</mat-hint>
           </mat-form-field>
 
