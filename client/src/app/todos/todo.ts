@@ -1,11 +1,10 @@
 export interface Todo {
   _id: string;
-  status: string;
+  status: boolean;
   owner: string;
   body: string;
   category: string;
   avatar: string;
-  role: TodoRole;
 }
 
-export type TodoRole = "admin" | "editor" | "viewer";
+//export type TodoRole = "admin" | "editor" | "viewer";

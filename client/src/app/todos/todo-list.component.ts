@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Todo, TodoRole } from './todo';
+import { Todo} from './todo';
 import { TodoService } from './todo.service';
 
 @Component({
@@ -13,8 +13,7 @@ export class TodoListComponent implements OnInit {
   // These are public so that tests can reference them (.spec.ts)
   public serverFilteredTodos: Todo[];
   public filteredTodos: Todo[];
-
-  public todoStatus: string;
+  public todoStatus: boolean;
   public todoOwner: string;
   public todoBody: string;
   public todoCategory: string;
@@ -33,7 +32,6 @@ export class TodoListComponent implements OnInit {
 
   getTodosFromServer() {
     this.todoService.getTodos({
-      role: this.todoRole,
       status: this.todoStatus
     }).subscribe(returnedTodos => {
       this.serverFilteredTodos = returnedTodos;

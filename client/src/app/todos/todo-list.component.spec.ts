@@ -16,7 +16,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
 import { MockTodoService } from '../../testing/todo.service.mock';
 import { Todo } from './todo';
-import { TodoCardComponent } from './todo-card.component';
+//import { TodoCardComponent } from './todo-card.component';
 import { TodoListComponent } from './todo-list.component';
 import { TodoService } from './todo.service';
 
@@ -42,15 +42,17 @@ describe('Todo list', () => {
   let todoList: TodoListComponent;
   let fixture: ComponentFixture<TodoListComponent>;
 
+
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [COMMON_IMPORTS],
-      declarations: [TodoListComponent, TodoCardComponent],
+      declarations: [TodoListComponent],
       // providers:    [ TodoService ]  // NO! Don't provide the real service!
       // Provide a test-double instead
       providers: [{ provide: TodoService, useValue: new MockTodoService() }]
     });
   });
+
 
   beforeEach(async(() => {
     TestBed.compileComponents().then(() => {
@@ -63,21 +65,20 @@ describe('Todo list', () => {
   it('contains all the todos', () => {
     expect(todoList.serverFilteredTodos.length).toBe(3);
   });
-//## THESE NEED TO BE CHANGED ##
-  it('contains a todo named \'Chris\'', () => {
-    expect(userList.serverFilteredUsers.some((user: User) => user.name === 'Chris')).toBe(true);
+  it('contains a todo named \'Pat\'', () => {
+    expect(todoList.serverFilteredTodos.some((todo: Todo) => todo.owner === 'Pat')).toBe(true);
   });
 
-  it('contain a user named \'Jamie\'', () => {
-    expect(userList.serverFilteredUsers.some((user: User) => user.name === 'Jamie')).toBe(true);
+  it('contain a todo named \'Jamie\'', () => {
+    expect(todoList.serverFilteredTodos.some((todo: Todo) => todo.owner === 'Jamie')).toBe(true);
   });
 
-  it('doesn\'t contain a user named \'Santa\'', () => {
-    expect(userList.serverFilteredUsers.some((user: User) => user.name === 'Santa')).toBe(false);
+  it('doesn\'t contain a todo named \'Santa\'', () => {
+    expect(todoList.serverFilteredTodos.some((todo: Todo) => todo.owner === 'Santa')).toBe(false);
   });
 
-  it('has two users that are 37 years old', () => {
-    expect(userList.serverFilteredUsers.filter((user: User) => user.age === 37).length).toBe(2);
+  it('has two todos that have status complete', () => {
+    expect(todoList.serverFilteredTodos.filter((todo: Todo) => todo.status === true).length).toBe(2);
   });
 });
 

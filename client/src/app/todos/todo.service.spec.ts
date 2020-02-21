@@ -10,7 +10,7 @@ describe('Todo service: ', () => {
 
     {
       _id: ' bob_id',
-      status: 'Complete',
+      status: true,
       owner: 'Bob',
       body: 'Make a working thingy.',
       category: 'Finishing the thing',
@@ -19,7 +19,7 @@ describe('Todo service: ', () => {
 
     {
       _id: 'pat_id',
-      status: 'Incomplete',
+      status: false,
       owner: 'Pat',
       body: 'Solve all the problems.',
       category: 'Fixing issues',
@@ -28,10 +28,10 @@ describe('Todo service: ', () => {
 
     {
       _id: 'jamie_id',
-      status: 'Complete',
+      status: true,
       owner: 'Jamie',
       body: 'Update old code.',
-      category: 'Updates'
+      category: 'Updates',
       avatar: 'https://gravatar.com/avatar/d4a6c71dd9470ad4cf58f78c100258bf?d=identicon'
     }
   ];
@@ -84,7 +84,7 @@ describe('Todo service: ', () => {
 
   it('getTodos() calls api/todos with filter parameter \'status\'', () => {
 
-    todoService.getTodos({ status: Complete }).subscribe(
+    todoService.getTodos({ status: true }).subscribe(
       todos => expect(todos).toBe(testTodos)
     );
 
@@ -125,12 +125,11 @@ describe('Todo service: ', () => {
 
   it('getTodos() calls api/todos with multiple filter parameters', () => {
 
-    todoService.getTodos({ status: 'Incomplete', owner: 'Pat', category: 'Fixing issues' }).subscribe(
+    todoService.getTodos({ status: false, owner: 'Pat', category: 'Fixing issues' }).subscribe(
       todos => expect(todos).toBe(testTodos)
     );
 
     // Specify that (exactly) one request will be made to the specified URL with the role parameter.
-    // CHANGES HERE
     const req = httpTestingController.expectOne(
       (request) => request.url.startsWith(todoService.todoUrl)
         && request.params.has('status') && request.params.has('owner') && request.params.has('category')
@@ -140,7 +139,6 @@ describe('Todo service: ', () => {
     expect(req.request.method).toEqual('GET');
 
     // Check that the role parameters are correct
-    // CHANGES HERE
     expect(req.request.params.get('status')).toEqual('Incomplete');
     expect(req.request.params.get('owner')).toEqual('Pat');
     expect(req.request.params.get('category')).toEqual('Fixing issues');
@@ -161,23 +159,22 @@ describe('Todo service: ', () => {
     req.flush(targetTodo);
   });
 
-  //CHANGES HERE
-  it('filterTodos() filters by name', () => {
+  it('filterTodos() filters by owner', () => {
     expect(testTodos.length).toBe(3);
-    const todoName = 'a';
-    expect(todoService.filterTodos(testTodos, { name: todoName }).length).toBe(2);
+    const todoOwner = 'a';
+    expect(todoService.filterTodos(testTodos, { owner: todoOwner }).length).toBe(2);
   });
 
-  it('filterTodos() filters by company', () => {
+  it('filterTodos() filters by category', () => {
     expect(testTodos.length).toBe(3);
-    const todoCompany = 'UMM';
-    expect(todoService.filterTodos(testTodos, { company: todoCompany }).length).toBe(1);
+    const todoCategory = 'Fixing issues';
+    expect(todoService.filterTodos(testTodos, { company: todoCategory }).length).toBe(1);
   });
 
-  it('filterTodos() filters by name and company', () => {
+  it('filterTodos() filters by owner and category', () => {
     expect(testTodos.length).toBe(3);
-    const todoCompany = 'UMM';
-    const todoName = 'chris';
-    expect(todoService.filterTodos(testTodos, { name: todoName, company: todoCompany }).length).toBe(1);
+    const todoCategory = 'Fixing issues';
+    const todoOwner = 'a';
+    expect(todoService.filterTodos(testTodos, { owner: todoOwner, category: todoCategory }).length).toBe(1);
   });
 });

@@ -11,11 +11,14 @@ export class TodoService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getTodos(filters?: { status?: string, owner?: string, body?: string }): Observable<Todo[]> {
+  getTodos(filters?: { status?: boolean, owner?: string, body?: string, category?: string}): Observable<Todo[]> {
     let httpParams: HttpParams = new HttpParams();
     if (filters) {
-      if (filters.status) {
-        httpParams = httpParams.set('status', filters.status);
+      if (filters.status == true) {
+        httpParams = httpParams.set('status', 'complete');
+      }
+      if (filters.status == false) {
+        httpParams = httpParams.set('status', 'incomplete');
       }
       if (filters.owner) {
         httpParams = httpParams.set('owner', filters.owner);
@@ -33,12 +36,40 @@ export class TodoService {
     return this.httpClient.get<Todo>(this.todoUrl + '/' + id);
   }
 
-  //CHANGES NEED TO TBE MADE
+  //CHANGES NEED TO BE MADE
 
-  filterTodos(todos: Todo[], filters: { category?: string }): Todo[] {
+  filterTodos(todos: Todo[], filters: { status?: boolean, category?: string, company?: string, owner?: string}): Todo[] {
 
     let filteredTodos = todos;
     // Filter by category
+    if (filters.category) {
+      filters.category = filters.category.toLowerCase();
+
+      filteredTodos = filteredTodos.filter(todo => {
+        return todo.category.toLowerCase().indexOf(filters.category) !== -1;
+      });
+    }
+
+    // Filter by status
+    if (filters.status) {
+      filters.status = filters.status.toLowerCase();
+
+      filteredTodos = filteredTodos.filter(todo => {
+        if (filteredTodos == 'complete')
+        return todo.status;
+      });
+    }
+
+    // Filter by company
+    if (filters.category) {
+      filters.category = filters.category.toLowerCase();
+
+      filteredTodos = filteredTodos.filter(todo => {
+        return todo.category.toLowerCase().indexOf(filters.category) !== -1;
+      });
+    }
+
+    // Filter by owner
     if (filters.category) {
       filters.category = filters.category.toLowerCase();
 
