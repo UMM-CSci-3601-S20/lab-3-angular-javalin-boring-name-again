@@ -52,18 +52,18 @@
   </div>
 </div>
 
-<!--
 <div fxLayout="row">
   <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredTodos; else todosError" >
-    !-- Switch between card and list view based on the viewType variable, set above in the mar-radio-group --
+    <!-- Switch between card and list view based on the viewType variable, set above in the mar-radio-group -->
     <div [ngSwitch]="viewType">
 
-      !-- Card grid view--
+       <!--Card grid view
       <div *ngSwitchCase="'card'" fxLayout="row wrap" fxLayoutGap="10px" class="todo-cards-container">
         <app-todo-card simple="true" *ngFor="let todo of filteredTodos" class="todo-card" [todo]="todo" fxFlex="1 1 280px"></app-todo-card>
       </div>
+    -->
 
-      !-- List view --
+      <!-- List view -->
       <mat-card *ngSwitchCase="'list'">
         <mat-card-content>
           <mat-nav-list class="todo-nav-list">
@@ -81,7 +81,7 @@
   </div>
 
 
-  !-- Maybe this should be a pop-up instead of just a text message? Not sure. --
+  <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
   <ng-template #todosError>
     <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" class="todo-error">
       <mat-error>
@@ -95,4 +95,3 @@
   </ng-template>
 
 </div>
--->

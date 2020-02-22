@@ -47,8 +47,8 @@ describe('Todo list', () => {
     TestBed.configureTestingModule({
       imports: [COMMON_IMPORTS],
       declarations: [TodoListComponent],
-      // providers:    [ TodoService ]  // NO! Don't provide the real service!
-      // Provide a test-double instead
+       //providers:    [ TodoService ]  // NO! Don't provide the real service!
+       //Provide a test-double instead
       providers: [{ provide: TodoService, useValue: new MockTodoService() }]
     });
   });

@@ -10,35 +10,32 @@ import { TodoService } from '../app/todos/todo.service';
 @Injectable()
 export class MockTodoService extends TodoService {
   static testTodos: Todo[] = [
-    /** These need to be changes
-    {
-      _id: 'chris_id',
-      name: 'Chris',
-      age: 25,
-      company: 'UMM',
-      email: 'chris@this.that',
-      role: 'admin',
-      avatar: 'https://gravatar.com/avatar/8c9616d6cc5de638ea6920fb5d65fc6c?d=identicon'
-    },
-    {
-      _id: 'pat_id',
-      name: 'Pat',
-      age: 37,
-      company: 'IBM',
-      email: 'pat@something.com',
-      role: 'editor',
-      avatar: 'https://gravatar.com/avatar/b42a11826c3bde672bce7e06ad729d44?d=identicon'
-    },
-    {
-      _id: 'jamie_id',
-      name: 'Jamie',
-      age: 37,
-      company: 'Frogs, Inc.',
-      email: 'jamie@frogs.com',
-      role: 'viewer',
-      avatar: 'https://gravatar.com/avatar/d4a6c71dd9470ad4cf58f78c100258bf?d=identicon'
-    }
-    */
+  {
+    _id: ' bob_id',
+    status: true,
+    owner: 'Bob',
+    body: 'Make a working thingy.',
+    category: 'Finishing the thing',
+    avatar: 'https://gravatar.com/avatar/8c9616d6cc5de638ea6920fb5d65fc6c?d=identicon'
+  },
+
+  {
+    _id: 'pat_id',
+    status: false,
+    owner: 'Pat',
+    body: 'Solve all the problems.',
+    category: 'Fixing issues',
+    avatar: 'https://gravatar.com/avatar/b42a11826c3bde672bce7e06ad729d44?d=identicon'
+  },
+
+  {
+    _id: 'jamie_id',
+    status: true,
+    owner: 'Jamie',
+    body: 'Update old code.',
+    category: 'Updates',
+    avatar: 'https://gravatar.com/avatar/d4a6c71dd9470ad4cf58f78c100258bf?d=identicon'
+  }
   ];
 
   constructor() {

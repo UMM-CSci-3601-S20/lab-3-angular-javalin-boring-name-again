@@ -36,8 +36,6 @@ export class TodoService {
     return this.httpClient.get<Todo>(this.todoUrl + '/' + id);
   }
 
-  //CHANGES NEED TO BE MADE
-
   filterTodos(todos: Todo[], filters: { status?: boolean, category?: string, body?: string, owner?: string}): Todo[] {
 
     let filteredTodos = todos;
