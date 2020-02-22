@@ -17,7 +17,7 @@ describe('Todo list', () => {
     page.typeInput('todo-owner-input', 'Fry');
 
     // All of the todo cards should have the owner we are filtering by
-    page.getTodosListItems().each(e => {
+    page.getTodoListItems().each(e => {
       expect(e.element(by.className('todo-list-owner')).getText()).toEqual('Fry');
     });
   });
@@ -26,7 +26,7 @@ describe('Todo list', () => {
     page.typeInput('todo-company-input', 'OHMNET');
 
     // All of the todo cards should have the company we are filtering by
-    page.getTodosListItems().each(e => {
+    page.getTodoListItems().each(e => {
       expect(e.element(by.className('todo-list-category')).getText()).toEqual('OHMNET');
     });
   });

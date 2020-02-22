@@ -31,11 +31,11 @@ export class TodoPage {
     });
   }
 
-  getTodosCards() {
+  getTodoCards() {
     return element(by.className('user-cards-container')).all(by.tagName('app-user-card'));
   }
 
-  getTodosListItems() {
+  getTodoListItems() {
     return element(by.className('user-nav-list')).all(by.className('user-list-item'));
   }
 
