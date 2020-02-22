@@ -47,6 +47,12 @@
         </div>
 
         <br>
+        <div fxLayout="row wrap" fxLayoutGap="10px">
+          <label>View type: </label>
+          <mat-radio-group aria-label="View type" [(ngModel)]="viewType" id="view-type-radio">
+            <mat-radio-button value="list">List</mat-radio-button>
+          </mat-radio-group>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>
@@ -61,7 +67,7 @@
       <div *ngSwitchCase="'card'" fxLayout="row wrap" fxLayoutGap="10px" class="todo-cards-container">
         <app-todo-card simple="true" *ngFor="let todo of filteredTodos" class="todo-card" [todo]="todo" fxFlex="1 1 280px"></app-todo-card>
       </div>
-    -->
+               -->
 
       <!-- List view -->
       <mat-card *ngSwitchCase="'list'">
@@ -76,7 +82,6 @@
           </mat-nav-list>
         </mat-card-content>
       </mat-card>
-
     </div>
   </div>
 
