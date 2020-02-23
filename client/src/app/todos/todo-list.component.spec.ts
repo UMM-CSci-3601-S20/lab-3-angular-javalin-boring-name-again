@@ -78,7 +78,7 @@ describe('Todo list', () => {
   });
 
   it('has two todos that have status complete', () => {
-    expect(todoList.serverFilteredTodos.filter((todo: Todo) => todo.status === true).length).toBe(2);
+    expect(todoList.serverFilteredTodos.filter((todo: Todo) => todo.status === 'incomplete').length).toBe(2);
   });
 });
 

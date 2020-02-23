@@ -13,7 +13,7 @@ export class TodoListComponent implements OnInit {
   // These are public so that tests can reference them (.spec.ts)
   public serverFilteredTodos: Todo[];
   public filteredTodos: Todo[];
-  public todoStatus: boolean;
+  public todoStatus: string;
   public todoOwner: string;
   public todoBody: string;
   public todoCategory: string;
