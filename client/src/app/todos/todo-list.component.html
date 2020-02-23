@@ -25,6 +25,7 @@
           </mat-form-field>
         </div>
 
+
         <div fxLayout="row wrap" fxLayoutGap="10px">
           <!-- Examples of filtering on the server -->
 
@@ -39,8 +40,8 @@
             <mat-label>Status</mat-label>
             <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todoStatus" id="todo-status-select">
               <mat-option>--</mat-option>
-              <mat-option value=true>Complete</mat-option>
-              <mat-option value=false>Incomplete</mat-option>
+              <mat-option value=true>complete</mat-option>
+              <mat-option value=false>incomplete</mat-option>
             </mat-select>
             <mat-hint>Filtered on server</mat-hint>
           </mat-form-field>
@@ -78,6 +79,8 @@
               <img matListAvatar [src]="todo.avatar">
               <h3 matLine class="todo-list-status"> {{todo.status}} </h3>
               <p matLine class="todo-list-owner"> {{todo.owner}} </p>
+              <p matLine class="todo-list-category"> {{todo.category}} </p>
+              <p matLine class="todo-list-body"> {{todo.body}} </p>
             </a>
           </mat-nav-list>
         </mat-card-content>

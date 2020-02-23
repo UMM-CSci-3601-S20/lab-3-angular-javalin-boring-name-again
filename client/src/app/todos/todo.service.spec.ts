@@ -104,7 +104,7 @@ describe('Todo service: ', () => {
 
   it('getTodos() calls api/todos with filter parameter \'category\'', () => {
 
-    //Changes need to happen here
+    // Changes need to happen here
     todoService.getTodos({ body: 'Fake body.' }).subscribe(
       todos => expect(todos).toBe(testTodos)
     );

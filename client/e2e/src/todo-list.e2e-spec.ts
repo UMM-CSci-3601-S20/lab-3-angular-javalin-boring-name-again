@@ -22,50 +22,50 @@ describe('Todo list', () => {
     });
   });
 
-  it('Should type something in the company filter and check that it returned correct elements', () => {
-    page.typeInput('todo-company-input', 'OHMNET');
+  it('Should type something in the category filter and check that it returned correct elements', () => {
+    page.typeInput('todo-category-input', 'video games');
 
-    // All of the todo cards should have the company we are filtering by
+    // All of the todo list should have the category we are filtering by
     page.getTodoListItems().each(e => {
-      expect(e.element(by.className('todo-list-category')).getText()).toEqual('OHMNET');
+      expect(e.element(by.className('todo-list-category')).getText()).toEqual('video games');
     });
   });
 
-  it('Should type something partial in the company filter and check that it returned correct elements', () => {
-    page.typeInput('todo-company-input', 'ti');
+  it('Should type something partial in the category filter and check that it returned correct elements', () => {
+    page.typeInput('todo-category-input', 'ti');
 
     // Go through each of the cards that are being shown and get the companies
-    let companies = page.getTodoCards().map(e => e.element(by.className('todo-card-company')).getText());
+    const categories = page.getTodoListItems().map(e => e.element(by.className('todo-list-category')).getText());
 
-    // We should see these companies
-    expect(companies).toContain('MOMENTIA');
-    expect(companies).toContain('KINETICUT');
+    // We should see these categories
+    expect(categories).toContain('homework');
+    expect(categories).toContain('video games');
 
     // We shouldn't see these companies
-    expect(companies).not.toContain('DATAGENE');
-    expect(companies).not.toContain('OHMNET');
+    expect(categories).not.toContain('DATAGENE');
+    expect(categories).not.toContain('OHMNET');
   });
 
-  it('Should type something in the age filter and check that it returned correct elements', () => {
-    page.typeInput('todo-age-input', '27');
+  it('Should type something in the owner filter and check that it returned correct elements', () => {
+    page.typeInput('todo-owner-input', 'Fry');
 
     // Go through each of the cards that are being shown and get the names
-    let names = page.getTodoCards().map(e => e.element(by.className('todo-card-name')).getText());
+    const owner = page.getTodoListItems().map(e => e.element(by.className('todo-card-name')).getText());
 
     // We should see these todos whose age is 27
-    expect(names).toContain('Stokes Clayton');
-    expect(names).toContain('Bolton Monroe');
-    expect(names).toContain('Merrill Parker');
+    expect(owner).toContain(' Fry');
+    expect(owner).toContain(' Blanche');
+    expect(owner).toContain(' Barry ');
 
     // We shouldn't see these todos
-    expect(names).not.toContain('Connie Stewart');
-    expect(names).not.toContain('Lynn Ferguson');
+    expect(owner).not.toContain(' Stewart');
+    expect(owner).not.toContain(' Ferguson');
   });
 
   it('Should change the view', () => {
     page.changeView('list');
 
-    expect(page.getTodoCards().count()).toEqual(0); // There should be no cards
+    // expect(page.getTodoCards().count()).toEqual(0); // There should be no cards
     expect(page.getTodoListItems().count()).toBeGreaterThan(0); // There should be list items
   });
 
@@ -81,7 +81,7 @@ describe('Todo list', () => {
   });
 
   it('Should click view profile on a todo and go to the right URL', () => {
-    page.clickViewProfile(page.getTodoCards().first());
+    page.clickViewProfile(page.getTodoListItems().first());
 
     // When the view profile button on the first todo card is clicked, we should be sent to the right URL
     page.getUrl().then(url => {
@@ -89,7 +89,7 @@ describe('Todo list', () => {
     });
 
     // On this profile page we were sent to, the name should be correct
-    expect(element(by.className('todo-card-name')).getText()).toEqual('Connie Stewart');
+    expect(element(by.className('todo-category-name')).getText()).toEqual('software design');
   });
 
 });

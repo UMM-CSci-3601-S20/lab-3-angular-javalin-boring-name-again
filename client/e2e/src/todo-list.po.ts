@@ -10,7 +10,7 @@ export class TodoPage {
   }
 
   getTodoTitle() {
-    let title = element(by.className('user-list-title')).getText();
+    const title = element(by.className('todo-list-title')).getText();
     return title;
   }
 
@@ -30,11 +30,11 @@ export class TodoPage {
       return element(by.css('mat-option[value="' + value + '"]')).click();
     });
   }
-
+  /*
   getTodoCards() {
     return element(by.className('user-cards-container')).all(by.tagName('app-user-card'));
   }
-
+  */
   getTodoListItems() {
     return element(by.className('user-nav-list')).all(by.className('user-list-item'));
   }
@@ -42,7 +42,6 @@ export class TodoPage {
   clickViewProfile(card: ElementFinder) {
     return card.element(by.buttonText('VIEW PROFILE')).click();
   }
-
   changeView(viewType: 'card' | 'list') {
     return element(by.id('view-type-radio')).element(by.css('mat-radio-button[value="' + viewType + '"]')).click();
   }

@@ -43,7 +43,7 @@ export class TodoListComponent implements OnInit {
 
   public updateFilter() {
     this.filteredTodos = this.todoService.filterTodos(
-      this.serverFilteredTodos, { status: this.todoStatus, owner: this.todoOwner });
+      this.serverFilteredTodos, { status: this.todoStatus, owner: this.todoOwner, category: this.todoCategory, body: this.todoBody});
   }
 
   /**

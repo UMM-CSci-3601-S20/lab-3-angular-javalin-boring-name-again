@@ -14,10 +14,9 @@ export class TodoService {
   getTodos(filters?: { status?: boolean, owner?: string, body?: string, category?: string}): Observable<Todo[]> {
     let httpParams: HttpParams = new HttpParams();
     if (filters) {
-      if (filters.status == true) {
+      if (filters.status === true) {
         httpParams = httpParams.set('status', 'complete');
-      }
-      if (filters.status == false) {
+      }  else {
         httpParams = httpParams.set('status', 'incomplete');
       }
       if (filters.owner) {
@@ -25,6 +24,9 @@ export class TodoService {
       }
       if (filters.body) {
         httpParams = httpParams.set('body', filters.body);
+      }
+      if (filters.category) {
+        httpParams = httpParams.set('category', filters.category);
       }
     }
     return this.httpClient.get<Todo[]>(this.todoUrl, {
@@ -51,11 +53,11 @@ export class TodoService {
     // Filter by status
     if (filters.status) {
       filteredTodos = filteredTodos.filter(todo => {
-        if (filters.status == true) {
-          return 'Complete'
+        if (filters.status === true) {
+          return 'Complete';
         }
-        if (filters.status == false) {
-          return 'Incomplete'
+        if (filters.status === false) {
+          return 'Incomplete';
         }
       });
     }
