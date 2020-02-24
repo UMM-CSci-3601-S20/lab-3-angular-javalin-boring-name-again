@@ -1,6 +1,6 @@
 <div fxLayout="row">
   <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10">
-
+    <div id='borderStyle'>
     <mat-card class="search-card">
       <mat-card-header>
         <mat-card-title class="todo-list-title">Todos</mat-card-title>
@@ -68,6 +68,7 @@
     </mat-card>
   </div>
 </div>
+</div>
 
 <div fxLayout="row">
   <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredTodos; else todosError" >
@@ -87,10 +88,10 @@
             <h3 mat-subheader>Todos</h3>
             <a mat-list-item *ngFor="let todo of this.filteredTodos" [routerLink]="['/todos', todo._id]" class="todo-list-item">
 
-              <h1 matLine class="todo-list-owner"> Owner: {{todo.owner}} </h1>
-              <h3 matLine class="todo-list-category"> Category: {{todo.category}} </h3>
-              <h3 matLine class="todo-list-status"> Status: {{todo.status}} </h3>
-              <h4 matLine class="todo-list-body"> Body:{{todo.body}} </h4>
+              <h1 matLine class="todo-list-owner">  {{todo.owner}} </h1>
+              <h3 matLine class="todo-list-category">  {{todo.category}} </h3>
+              <h3 matLine class="todo-list-status">  {{todo.status}} </h3>
+              <h4 matLine class="todo-list-body"> {{todo.body}} </h4>
 
             </a>
           </mat-nav-list>
