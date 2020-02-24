@@ -14,7 +14,6 @@ describe('Todo service: ', () => {
       owner: 'Bob',
       body: 'Make a working thingy.',
       category: 'homework',
-      avatar: 'https://gravatar.com/avatar/8c9616d6cc5de638ea6920fb5d65fc6c?d=identicon'
     },
 
     {
@@ -23,7 +22,6 @@ describe('Todo service: ', () => {
       owner: 'Pat',
       body: 'Solve all the problems.',
       category: 'Fixing issues',
-      avatar: 'https://gravatar.com/avatar/b42a11826c3bde672bce7e06ad729d44?d=identicon'
     },
 
     {
@@ -32,7 +30,6 @@ describe('Todo service: ', () => {
       owner: 'Jamie',
       body: 'Update old code.',
       category: 'Updates',
-      avatar: 'https://gravatar.com/avatar/d4a6c71dd9470ad4cf58f78c100258bf?d=identicon'
     }
   ];
   let todoService: TodoService;
