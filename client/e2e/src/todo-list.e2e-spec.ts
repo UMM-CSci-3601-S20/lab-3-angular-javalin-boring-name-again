@@ -15,7 +15,7 @@ describe('Todo list', () => {
   });
 
   // Testing Owner Filter
-  it('Should type something in the owner filter and check that it returned Fry', () => {
+  it('Should type something in the owner filter and check that it returned todos with string Fry', () => {
     page.typeInput('todo-owner-input', 'Fry');
 
     // All of the todos in the list should have the owner we are filtering by
@@ -25,7 +25,7 @@ describe('Todo list', () => {
   });
 
   // Testing for Category Filter
-  it('Should type something in the category filter and check that it returned video games', () => {
+  it('Should type something in the category filter and check that it returned todos with string video games', () => {
     page.typeInput('todo-category-input', 'video games');
 
     // All of the todo list should have the category we are filtering by
@@ -35,7 +35,7 @@ describe('Todo list', () => {
   });
 
  // Testing for Status Filter
-  it('Should type something in the status filter and check that it returned true status', () => {
+  it('Should type something in the status filter and check that it returned todos with true status', () => {
     page.changeView('list');
     page.selectMatSelectValue('todo-status-select', 'complete');
 // All of the todo list should have the status we are filtering by
@@ -46,7 +46,7 @@ describe('Todo list', () => {
 
 
  // Testing for Status Filter
-  it('Should type something in the status filter and check that it returned false status', () => {
+  it('Should type something in the status filter and check that it returned todos with false status', () => {
     page.changeView('list');
     page.selectMatSelectValue('todo-status-select', 'incomplete');
 
@@ -58,7 +58,7 @@ describe('Todo list', () => {
 
 
   // Testing for Body filter
-  it('Should type something in the body filter and check that it returned tempor cillum ', () => {
+  it('Should type something in the body filter and check that it returned todos with tempor cillum ', () => {
     page.changeView('list');
     page.typeInput('todo-body-input', 'tempor cillum');
 // All of the todo list should have the status we are filtering by
@@ -79,23 +79,6 @@ describe('Todo list', () => {
       });
 
 
-
-  /*
-  it('Should type something in the body filter and check that it returned correct elements', () => {
-    page.typeInput('todo-body-input', 'non');
-
-    // All of the todos in the list should have the owner we are filtering by
-    page.getTodoListItems().each(e => {
-      expect(e.element(by.className('todo-list-body')).getText()).toEqual('non');
-    });
-  });
-
-  it('Should change the view', () => {
-    page.changeView('list');
-    expect(page.getTodoListItems().count()).toBeGreaterThan(0); // There should be list items
-  });
-
-  */
 
 
   /*
