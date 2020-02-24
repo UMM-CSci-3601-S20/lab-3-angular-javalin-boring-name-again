@@ -30,19 +30,19 @@
           <!-- Examples of filtering on the server -->
 
           <mat-form-field class="input-field">
-            <mat-label>Body</mat-label>
-            <input matInput id="todo-body-input" type="string" placeholder="Filter by body"
-            [(ngModel)]="todoBody" (input)="getTodosFromServer()">
-            <mat-hint>Filtered on Server</mat-hint>
-          </mat-form-field>
-
-          <mat-form-field class="input-field">
             <mat-label>Status</mat-label>
             <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todoStatus" id="user-role-select">
             <mat-option>--</mat-option>
             <mat-option value="complete"> Complete </mat-option>
             <mat-option value= "incomplete">Incomplete </mat-option>
             </mat-select>
+            <mat-hint>Filtered on server</mat-hint>
+          </mat-form-field>
+
+          <mat-form-field class="input-field">
+            <mat-label>Limit</mat-label>
+            <input matInput id="todo-limit-input" type="string" placeholder="Limiting Todos "
+             [(ngModel)]="todoLimit" (input)="getTodosFromServer()">
             <mat-hint>Filtered on server</mat-hint>
           </mat-form-field>
         </div>
@@ -76,7 +76,6 @@
           <mat-nav-list class="todo-nav-list">
             <h3 mat-subheader>Todos</h3>
             <a mat-list-item *ngFor="let todo of this.filteredTodos" [routerLink]="['/todos', todo._id]" class="todo-list-item">
-              <img matListAvatar [src]="todo.avatar">
               <h3 matLine class="todo-list-status"> {{todo.status}} </h3>
               <p matLine class="todo-list-owner"> {{todo.owner}} </p>
               <p matLine class="todo-list-category"> {{todo.category}} </p>

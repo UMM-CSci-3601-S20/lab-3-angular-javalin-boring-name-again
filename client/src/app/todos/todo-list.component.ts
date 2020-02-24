@@ -18,6 +18,7 @@ export class TodoListComponent implements OnInit {
   public todoBody: string;
   public todoCategory: string;
   public viewType: 'list';
+  public todoLimit: number;
 
 
   // Inject the TodoService into this component.

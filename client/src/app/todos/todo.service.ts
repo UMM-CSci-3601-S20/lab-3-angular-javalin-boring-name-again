@@ -30,6 +30,7 @@ export class TodoService {
       if (filters.category) {
         httpParams = httpParams.set('category', filters.category);
       }
+
     }
     return this.httpClient.get<Todo[]>(this.todoUrl, {
       params: httpParams,

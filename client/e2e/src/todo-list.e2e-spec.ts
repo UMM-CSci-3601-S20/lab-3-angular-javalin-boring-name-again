@@ -63,14 +63,26 @@ describe('Todo list', () => {
   it('Should type something in the body filter and check that it returned tempor cillum ', () => {
     page.changeView('list');
     page.typeInput('todo-body-input', 'tempor cillum');
-    let body = page.getTodoListItems().map(e => e.element(by.className('todo-list-body')).getText());
-
-    expect(body).toContain('tempor cillum');
 // All of the todo list should have the status we are filtering by
     let owner = page.getTodoListItems().map(e => e.element(by.className('todo-list-owner')).getText());
 
     expect(owner).toContain('Fry');
-    expect(owner).toContain(' Blanche');
+    expect(owner).toContain('Blanche');
+
+      });
+
+
+
+        // Testing for Limiting filter
+  it('Should type something in the body filter and check that it it showed 5 todos ', () => {
+    page.changeView('list');
+    page.typeInput('todo-limit-input',  '5' );
+    page.typeInput('todo-body-input',  'tempor cillum' );
+// All of the todo list should have the status we are filtering by
+    let owner = page.getTodoListItems().map(e => e.element(by.className('todo-list-limit')).getText());
+
+    expect(owner).toContain('Fry');
+    expect(owner).toContain('Blanche');
 
       });
 
