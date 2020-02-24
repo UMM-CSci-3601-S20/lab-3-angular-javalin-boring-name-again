@@ -11,6 +11,11 @@
   margin-bottom: 10px;
 }
 
+#borderStyle {
+  margin-bottom: 10px;
+  border:        100px;
+  border-color:  maroon;
+}
 .mat-radio-button {
   margin: 0 12px;
 }
@@ -19,7 +24,9 @@
 color: maroon;
 }
 .todo-nav-list {
-color: maroon;
+color:          maroon;
+border:         10px;
+border-color:   maroon;
 }
 .h1{
 color: maroon;
