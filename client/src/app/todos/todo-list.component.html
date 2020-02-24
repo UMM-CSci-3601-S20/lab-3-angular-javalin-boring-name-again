@@ -23,11 +23,21 @@
             [(ngModel)]="todoOwner" (input)="updateFilter()">
             <mat-hint>Filtered in Angular</mat-hint>
           </mat-form-field>
+
+
+          <mat-form-field class="input-field">
+            <mat-label>Body</mat-label>
+            <input matInput id="todo-body-input" type="string" placeholder="Filter by body"
+            [(ngModel)]="todoBody" (input)="updateFilter()">
+            <mat-hint>Filtered in Angular</mat-hint>
+          </mat-form-field>
         </div>
 
 
         <div fxLayout="row wrap" fxLayoutGap="10px">
           <!-- Examples of filtering on the server -->
+
+
 
           <mat-form-field class="input-field">
             <mat-label>Status</mat-label>
@@ -41,8 +51,8 @@
 
           <mat-form-field class="input-field">
             <mat-label>Limit</mat-label>
-            <input matInput id="todo-limit-input" type="string" placeholder="Limiting Todos "
-             [(ngModel)]="todoLimit" (input)="getTodosFromServer()">
+            <input matInput id="todo-limit-input" type="string" placeholder="Limiting Todos"
+            [(ngModel)]="todoLimit" (input)="getTodosFromServer()">
             <mat-hint>Filtered on server</mat-hint>
           </mat-form-field>
         </div>
