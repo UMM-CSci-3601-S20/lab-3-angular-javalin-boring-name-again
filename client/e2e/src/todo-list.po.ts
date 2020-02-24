@@ -36,13 +36,13 @@ export class TodoPage {
   }
   */
   getTodoListItems() {
-    return element(by.className('user-nav-list')).all(by.className('user-list-item'));
+    return element(by.className('todo-nav-list')).all(by.className('todo-list-item'));
   }
 
   clickViewProfile(card: ElementFinder) {
     return card.element(by.buttonText('VIEW PROFILE')).click();
   }
-  changeView(viewType: 'card' | 'list') {
+  changeView(viewType: 'list') {
     return element(by.id('view-type-radio')).element(by.css('mat-radio-button[value="' + viewType + '"]')).click();
   }
 }
