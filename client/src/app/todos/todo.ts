@@ -6,5 +6,4 @@ export interface Todo {
   category: string;
   avatar: string;
 }
-
-//export type TodoRole = "admin" | "editor" | "viewer";
+export type TodoStatus = 'complete' | 'incomplete'

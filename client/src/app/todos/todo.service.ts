@@ -49,15 +49,6 @@ export class TodoService {
       });
     }
 
-    // Filter by status
-    if (filters.status) {
-      filters.status = filters.status.toLowerCase();
-      filteredTodos = filteredTodos.filter(todo => {
-
-        return todo.status.toLowerCase().indexOf(filters.status) !== -1;
-      });
-    }
-
     // Filter by body
     if (filters.body) {
       filters.body = filters.body.toLowerCase();
