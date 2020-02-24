@@ -16,7 +16,6 @@ export class MockTodoService extends TodoService {
     owner: 'Bob',
     body: 'Make a working thingy.',
     category: 'Finishing the thing',
-    avatar: 'https://gravatar.com/avatar/8c9616d6cc5de638ea6920fb5d65fc6c?d=identicon'
   },
 
   {
@@ -25,7 +24,6 @@ export class MockTodoService extends TodoService {
     owner: 'Fry',
     body: 'Solve all the problems.',
     category: 'homework',
-    avatar: 'https://gravatar.com/avatar/b42a11826c3bde672bce7e06ad729d44?d=identicon'
   },
 
   {
@@ -34,7 +32,6 @@ export class MockTodoService extends TodoService {
     owner: 'Jamie',
     body: 'Update old code.',
     category: 'Updates',
-    avatar: 'https://gravatar.com/avatar/d4a6c71dd9470ad4cf58f78c100258bf?d=identicon'
   }
   ];
 
@@ -46,16 +43,4 @@ export class MockTodoService extends TodoService {
     // Just return the test users regardless of what filters are passed in
     return of(MockTodoService.testTodos);
   }
-
-  getTodoById(id: string): Observable<Todo> {
-    // If the specified ID is for the first test todo,
-    // return that todo, otherwise return `null` so
-    // we can test illegal todo requests.
-    if (id === MockTodoService.testTodos[0]._id) {
-      return of(MockTodoService.testTodos[0]);
-    } else {
-      return of(null);
-    }
-  }
-
 }

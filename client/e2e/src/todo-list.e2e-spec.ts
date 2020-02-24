@@ -34,10 +34,52 @@ describe('Todo list', () => {
     });
   });
 
+ // Testing for Status Filter
+  it('Should type something in the status filter and check that it returned true status', () => {
+    page.changeView('list');
+    page.selectMatSelectValue('todo-status-select', 'complete');
+// All of the todo list should have the status we are filtering by
+    page.getTodoListItems().each(e => {
+    expect(e.element(by.className('todo-list-status')).getText()).toEqual('true');
+      });
+    });
 
+
+ // Testing for Status Filter
+  it('Should type something in the status filter and check that it returned false status', () => {
+    page.changeView('list');
+    page.selectMatSelectValue('todo-status-select', 'incomplete');
+
+// All of the todo list should have the status we are filtering by
+    page.getTodoListItems().each(e => {
+    expect(e.element(by.className('todo-list-status')).getText()).toEqual('false');
+      });
+    });
 
 
   // Testing for Body filter
+  it('Should type something in the body filter and check that it returned tempor cillum ', () => {
+    page.changeView('list');
+    page.typeInput('todo-body-input', 'tempor cillum');
+// All of the todo list should have the status we are filtering by
+    let owner = page.getTodoListItems().map(e => e.element(by.className('todo-list-owner')).getText());
+
+    expect(owner).toContain('Fry');
+    expect(owner).toContain('Blanche');
+
+      });
+
+        // Testing for Limiting filter
+  it('Should type something in the body filter and check that it it showed 12 todos ', () => {
+    page.changeView('list');
+    page.typeInput('todo-limit-input',  '12' );
+    expect(page.getTodoListItems().count()).toEqual(12);
+
+
+      });
+
+
+
   /*
   it('Should type something in the body filter and check that it returned correct elements', () => {
     page.typeInput('todo-body-input', 'non');

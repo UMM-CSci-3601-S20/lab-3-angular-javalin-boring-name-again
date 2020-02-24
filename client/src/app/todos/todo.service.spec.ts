@@ -14,7 +14,6 @@ describe('Todo service: ', () => {
       owner: 'Bob',
       body: 'Make a working thingy.',
       category: 'homework',
-      avatar: 'https://gravatar.com/avatar/8c9616d6cc5de638ea6920fb5d65fc6c?d=identicon'
     },
 
     {
@@ -23,7 +22,6 @@ describe('Todo service: ', () => {
       owner: 'Pat',
       body: 'Solve all the problems.',
       category: 'Fixing issues',
-      avatar: 'https://gravatar.com/avatar/b42a11826c3bde672bce7e06ad729d44?d=identicon'
     },
 
     {
@@ -32,7 +30,6 @@ describe('Todo service: ', () => {
       owner: 'Jamie',
       body: 'Update old code.',
       category: 'Updates',
-      avatar: 'https://gravatar.com/avatar/d4a6c71dd9470ad4cf58f78c100258bf?d=identicon'
     }
   ];
   let todoService: TodoService;
@@ -121,6 +118,23 @@ describe('Todo service: ', () => {
     req.flush(testTodos);
   });
 
+    // Testing Body
+  it('getTodos() calls api/todos with filter parameter \'body\'', () => {
+      todoService.getTodos({ body: 'Updates' }).subscribe(
+        todos => expect(todos).toBe(testTodos)
+      );
+      // Specify that (exactly) one request will be made to the specified URL with the role parameter.
+      let req = httpTestingController.expectOne(
+        (request) => request.url.startsWith(todoService.todoUrl) && request.params.has('body')
+      );
+      // Check that the request made to that URL was a GET request.
+      expect(req.request.method).toEqual('GET');
+      // Check that the role parameter was 'admin'
+      expect(req.request.params.get('body')).toEqual('Updates');
+      req.flush(testTodos);
+    });
+
+
   it('getTodos() calls api/todos with multiple filter parameters', () => {
 
     todoService.getTodos({ status: 'complete', owner: 'Fry', category: 'homework' }).subscribe(
@@ -142,19 +156,6 @@ describe('Todo service: ', () => {
     expect(req.request.params.get('category')).toEqual('homework');
 
     req.flush(testTodos);
-  });
-
-  it('getTodoById() calls api/todos/id', () => {
-    const targetTodo: Todo = testTodos[1];
-    const targetId: string = targetTodo._id;
-    todoService.getTodoById(targetId).subscribe(
-      todo => expect(todo).toBe(targetTodo)
-    );
-
-    const expectedUrl: string = todoService.todoUrl + '/' + targetId;
-    const req = httpTestingController.expectOne(expectedUrl);
-    expect(req.request.method).toEqual('GET');
-    req.flush(targetTodo);
   });
 
   it('filterTodos() filters by owner', () => {
