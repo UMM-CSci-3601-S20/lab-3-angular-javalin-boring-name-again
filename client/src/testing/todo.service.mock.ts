@@ -21,10 +21,10 @@ export class MockTodoService extends TodoService {
 
   {
     _id: 'pat_id',
-    status: 'incomplete',
-    owner: 'Pat',
+    status: 'complete',
+    owner: 'Fry',
     body: 'Solve all the problems.',
-    category: 'Fixing issues',
+    category: 'homework',
     avatar: 'https://gravatar.com/avatar/b42a11826c3bde672bce7e06ad729d44?d=identicon'
   },
 
