@@ -10,16 +10,16 @@ describe('Todo service: ', () => {
 
     {
       _id: ' bob_id',
-      status: true,
+      status: 'complete',
       owner: 'Bob',
       body: 'Make a working thingy.',
-      category: 'Finishing the thing',
+      category: 'homework',
       avatar: 'https://gravatar.com/avatar/8c9616d6cc5de638ea6920fb5d65fc6c?d=identicon'
     },
 
     {
       _id: 'pat_id',
-      status: false,
+      status: 'incomplete',
       owner: 'Pat',
       body: 'Solve all the problems.',
       category: 'Fixing issues',
@@ -28,7 +28,7 @@ describe('Todo service: ', () => {
 
     {
       _id: 'jamie_id',
-      status: true,
+      status: 'complete',
       owner: 'Jamie',
       body: 'Update old code.',
       category: 'Updates',
@@ -84,7 +84,7 @@ describe('Todo service: ', () => {
 
   it('getTodos() calls api/todos with filter parameter \'status\'', () => {
 
-    todoService.getTodos({ status: true }).subscribe(
+    todoService.getTodos({ status: 'Complete' }).subscribe(
       todos => expect(todos).toBe(testTodos)
     );
 
@@ -103,14 +103,12 @@ describe('Todo service: ', () => {
   });
 
   it('getTodos() calls api/todos with filter parameter \'category\'', () => {
-
-    //Changes need to happen here
-    todoService.getTodos({ body: 'Fake body.' }).subscribe(
+    todoService.getTodos({ category: 'Updates' }).subscribe(
       todos => expect(todos).toBe(testTodos)
     );
 
     // Specify that (exactly) one request will be made to the specified URL with the role parameter.
-    const req = httpTestingController.expectOne(
+    let req = httpTestingController.expectOne(
       (request) => request.url.startsWith(todoService.todoUrl) && request.params.has('category')
     );
 
@@ -125,12 +123,12 @@ describe('Todo service: ', () => {
 
   it('getTodos() calls api/todos with multiple filter parameters', () => {
 
-    todoService.getTodos({ status: false, owner: 'Pat', category: 'Fixing issues' }).subscribe(
+    todoService.getTodos({ status: 'complete', owner: 'Fry', category: 'homework' }).subscribe(
       todos => expect(todos).toBe(testTodos)
     );
 
     // Specify that (exactly) one request will be made to the specified URL with the role parameter.
-    const req = httpTestingController.expectOne(
+    let req = httpTestingController.expectOne(
       (request) => request.url.startsWith(todoService.todoUrl)
         && request.params.has('status') && request.params.has('owner') && request.params.has('category')
     );
@@ -139,9 +137,9 @@ describe('Todo service: ', () => {
     expect(req.request.method).toEqual('GET');
 
     // Check that the role parameters are correct
-    expect(req.request.params.get('status')).toEqual('Incomplete');
-    expect(req.request.params.get('owner')).toEqual('Pat');
-    expect(req.request.params.get('category')).toEqual('Fixing issues');
+    expect(req.request.params.get('status')).toEqual('complete');
+    expect(req.request.params.get('owner')).toEqual('Fry');
+    expect(req.request.params.get('category')).toEqual('homework');
 
     req.flush(testTodos);
   });
@@ -161,20 +159,20 @@ describe('Todo service: ', () => {
 
   it('filterTodos() filters by owner', () => {
     expect(testTodos.length).toBe(3);
-    const todoOwner = 'a';
-    expect(todoService.filterTodos(testTodos, { owner: todoOwner }).length).toBe(2);
+    const todoOwner = 'Fry';
+    expect(todoService.filterTodos(testTodos, { owner: todoOwner }).length).toBe(0);
   });
 
   it('filterTodos() filters by category', () => {
     expect(testTodos.length).toBe(3);
-    const todoCategory = 'Fixing issues';
-    expect(todoService.filterTodos(testTodos, { category: todoCategory }).length).toBe(1);
+    const todoCategory = 'software design';
+    expect(todoService.filterTodos(testTodos, { category: todoCategory }).length).toBe(0);
   });
 
   it('filterTodos() filters by owner and category', () => {
     expect(testTodos.length).toBe(3);
-    const todoCategory = 'Fixing issues';
-    const todoOwner = 'a';
-    expect(todoService.filterTodos(testTodos, { owner: todoOwner, category: todoCategory }).length).toBe(1);
+    const todoCategory = ' software design';
+    const todoOwner = 'Blanche';
+    expect(todoService.filterTodos(testTodos, { owner: todoOwner, category: todoCategory }).length).toBe(0);
   });
 });

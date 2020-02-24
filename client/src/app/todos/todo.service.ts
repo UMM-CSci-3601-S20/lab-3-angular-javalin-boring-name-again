@@ -11,20 +11,21 @@ export class TodoService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getTodos(filters?: { status?: boolean, owner?: string, body?: string, category?: string}): Observable<Todo[]> {
+  getTodos(filters?: { status?: string, owner?: string, body?: string, category?: string}): Observable<Todo[]> {
     let httpParams: HttpParams = new HttpParams();
     if (filters) {
-      if (filters.status == true) {
-        httpParams = httpParams.set('status', 'complete');
+      if (filters.status ) {
+        httpParams = httpParams.set('status', filters.status);
       }
-      if (filters.status == false) {
-        httpParams = httpParams.set('status', 'incomplete');
-      }
+
       if (filters.owner) {
         httpParams = httpParams.set('owner', filters.owner);
       }
       if (filters.body) {
         httpParams = httpParams.set('body', filters.body);
+      }
+      if (filters.category) {
+        httpParams = httpParams.set('category', filters.category);
       }
     }
     return this.httpClient.get<Todo[]>(this.todoUrl, {
@@ -36,9 +37,7 @@ export class TodoService {
     return this.httpClient.get<Todo>(this.todoUrl + '/' + id);
   }
 
-  //CHANGES NEED TO BE MADE
-
-  filterTodos(todos: Todo[], filters: { status?: boolean, category?: string, body?: string, owner?: string}): Todo[] {
+  filterTodos(todos: Todo[], filters: { status?: string, category?: string, body?: string, owner?: string}): Todo[] {
 
     let filteredTodos = todos;
     // Filter by category
@@ -52,13 +51,10 @@ export class TodoService {
 
     // Filter by status
     if (filters.status) {
+      filters.status = filters.status.toLowerCase();
       filteredTodos = filteredTodos.filter(todo => {
-        if (filters.status == true) {
-          return 'Complete'
-        }
-        if (filters.status == false) {
-          return 'Incomplete'
-        }
+
+        return todo.status.toLowerCase().indexOf(filters.status) !== -1;
       });
     }
 

@@ -25,6 +25,7 @@
           </mat-form-field>
         </div>
 
+
         <div fxLayout="row wrap" fxLayoutGap="10px">
           <!-- Examples of filtering on the server -->
 
@@ -37,33 +38,36 @@
 
           <mat-form-field class="input-field">
             <mat-label>Status</mat-label>
-            <mat-select (selectionChange)="getTodosFromServer()" [(ngModel)]="todoStatus" id="todo-status-select">
-              <mat-option>--</mat-option>
-              <mat-option value=true>Complete</mat-option>
-              <mat-option value=false>Incomplete</mat-option>
-            </mat-select>
+            <input matInput id="todo-Status-input" type="string" placeholder="Filter by Status"
+            [(ngModel)]="todoStatus" (input)="getTodosFromServer()">
             <mat-hint>Filtered on server</mat-hint>
           </mat-form-field>
         </div>
 
         <br>
+        <div fxLayout="row wrap" fxLayoutGap="10px">
+          <label>View type: </label>
+          <mat-radio-group aria-label="View type" [(ngModel)]="viewType" id="view-type-radio">
+            <mat-radio-button value="list">List</mat-radio-button>
+          </mat-radio-group>
+        </div>
       </mat-card-content>
     </mat-card>
   </div>
 </div>
 
-<!--
 <div fxLayout="row">
   <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" *ngIf="serverFilteredTodos; else todosError" >
-    !-- Switch between card and list view based on the viewType variable, set above in the mar-radio-group --
+    <!-- Switch between card and list view based on the viewType variable, set above in the mar-radio-group -->
     <div [ngSwitch]="viewType">
 
-      !-- Card grid view--
+       <!--Card grid view
       <div *ngSwitchCase="'card'" fxLayout="row wrap" fxLayoutGap="10px" class="todo-cards-container">
         <app-todo-card simple="true" *ngFor="let todo of filteredTodos" class="todo-card" [todo]="todo" fxFlex="1 1 280px"></app-todo-card>
       </div>
+               -->
 
-      !-- List view --
+      <!-- List view -->
       <mat-card *ngSwitchCase="'list'">
         <mat-card-content>
           <mat-nav-list class="todo-nav-list">
@@ -72,16 +76,17 @@
               <img matListAvatar [src]="todo.avatar">
               <h3 matLine class="todo-list-status"> {{todo.status}} </h3>
               <p matLine class="todo-list-owner"> {{todo.owner}} </p>
+              <p matLine class="todo-list-category"> {{todo.category}} </p>
+              <p matLine class="todo-list-body"> {{todo.body}} </p>
             </a>
           </mat-nav-list>
         </mat-card-content>
       </mat-card>
-
     </div>
   </div>
 
 
-  !-- Maybe this should be a pop-up instead of just a text message? Not sure. --
+  <!-- Maybe this should be a pop-up instead of just a text message? Not sure. -->
   <ng-template #todosError>
     <div fxFlex fxFlex.gt-sm="80" fxFlexOffset.gt-sm="10" class="todo-error">
       <mat-error>
@@ -95,4 +100,3 @@
   </ng-template>
 
 </div>
--->

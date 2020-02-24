@@ -16,7 +16,7 @@ import { RouterTestingModule } from '@angular/router/testing';
 import { Observable } from 'rxjs';
 import { MockTodoService } from '../../testing/todo.service.mock';
 import { Todo } from './todo';
-//import { TodoCardComponent } from './todo-card.component';
+// import { TodoCardComponent } from './todo-card.component';
 import { TodoListComponent } from './todo-list.component';
 import { TodoService } from './todo.service';
 
@@ -47,8 +47,8 @@ describe('Todo list', () => {
     TestBed.configureTestingModule({
       imports: [COMMON_IMPORTS],
       declarations: [TodoListComponent],
-      // providers:    [ TodoService ]  // NO! Don't provide the real service!
-      // Provide a test-double instead
+       // providers:    [ TodoService ]  // NO! Don't provide the real service!
+       // Provide a test-double instead
       providers: [{ provide: TodoService, useValue: new MockTodoService() }]
     });
   });
@@ -65,8 +65,8 @@ describe('Todo list', () => {
   it('contains all the todos', () => {
     expect(todoList.serverFilteredTodos.length).toBe(3);
   });
-  it('contains a todo named \'Pat\'', () => {
-    expect(todoList.serverFilteredTodos.some((todo: Todo) => todo.owner === 'Pat')).toBe(true);
+  it('doesn\'t contain a todo named \'Pat\'', () => {
+    expect(todoList.serverFilteredTodos.some((todo: Todo) => todo.owner === 'Pat')).toBe(false);
   });
 
   it('contain a todo named \'Jamie\'', () => {
@@ -77,8 +77,8 @@ describe('Todo list', () => {
     expect(todoList.serverFilteredTodos.some((todo: Todo) => todo.owner === 'Santa')).toBe(false);
   });
 
-  it('has two todos that have status complete', () => {
-    expect(todoList.serverFilteredTodos.filter((todo: Todo) => todo.status === true).length).toBe(2);
+  it('has zero todos that have status complete', () => {
+    expect(todoList.serverFilteredTodos.filter((todo: Todo) => todo.status === 'incomplete').length).toBe(0);
   });
 });
 
